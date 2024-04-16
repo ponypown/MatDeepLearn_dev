@@ -38,6 +38,8 @@
 
 ## Development
 
+This is my own forked version of the repo. I update it occasionally with the work done in our VIP working with Dr. Fung. 
+
 #### Code Quality
 This project uses flake8, black, and isort for linting.
 To install the pre-commit git hook, run:
