@@ -1,4 +1,3 @@
-
 import torch
 from typing import Optional, Tuple
 from torch import Tensor, nn

@@ -1,5 +1,3 @@
-
-
 import logging
 import math
 import os
@@ -17,12 +15,12 @@ from matdeeplearn.models.utils import (
     get_pbc_distances,
     radius_graph_pbc,
 )
-from matdeeplearn.models.ocpbase import BaseModel
-from matdeeplearn.models.gemnet.layers.base_layers import ScaledSiLU
-from matdeeplearn.models.gemnet.layers.embedding_block import AtomEmbedding
-from matdeeplearn.models.gemnet.layers.radial_basis import RadialBasis
-from matdeeplearn.models.gemnet.layers.scale_factor import ScaleFactor
-from matdeeplearn.models.gemnet.layers.compat import load_scales_compat
+from matdeeplearn.models.in_progress.ocpbase import BaseModel
+from matdeeplearn.models.in_progress.gemnet.layers.base_layers import ScaledSiLU
+from matdeeplearn.models.in_progress.gemnet.layers.embedding_block import AtomEmbedding
+from matdeeplearn.models.in_progress.gemnet.layers.radial_basis import RadialBasis
+from matdeeplearn.models.in_progress.gemnet.layers.scale_factor import ScaleFactor
+from matdeeplearn.models.in_progress.gemnet.layers.compat import load_scales_compat
 
 from .utils import get_edge_id, repeat_blocks
 

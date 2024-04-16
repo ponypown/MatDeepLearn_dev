@@ -48,6 +48,23 @@ class NumNodeTransform(object):
         data.num_nodes = data.x.shape[0]
         return data
 
+@registry.register_transform("NoisyNode")
+class NoisyNode(object):
+    """
+    Add randomly sampled gaussian noise to
+    every position/coordinate of the data object
+    """
+    def __init__(self, std=0.1):
+        self.std = std
+
+    def __call__(self, data):
+        # generate noise
+        noise = torch.normal(0, self.std, data.pos.shape)
+        pos = data.pos + noise
+
+        data.pos = pos
+        data.noise = noise
+        return data
 
 @registry.register_transform("LineGraphMod")
 class LineGraphMod(object):

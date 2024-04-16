@@ -30,6 +30,18 @@ class ForceLoss(nn.Module):
         combined_loss = self.weight_energy*F.l1_loss(predictions["output"], target.y) + self.weight_force*F.l1_loss(predictions["pos_grad"], target.forces)
         return combined_loss
 
+@registry.register_loss("NoisyNodeLoss")
+class ForceLoss(nn.Module):
+    def __init__(self, weight_energy=1.0, weight_noise=0.1):
+        super().__init__()
+        self.weight_energy = weight_energy
+        self.weight_noise = weight_noise
+
+    def forward(self, predictions: torch.Tensor, target: Batch):
+        loss_energy = F.l1_loss(predictions["output"], target.y)
+        loss_noise = F.l1_loss(predictions["pos_grad"], target.noise)
+        combined_loss = self.weight_energy*loss_energy + self.weight_noise*loss_noise
+        return combined_loss
 
 @registry.register_loss("ForceStressLoss")
 class ForceStressLoss(nn.Module):

@@ -5,7 +5,7 @@ task:
   identifier: my_train_job
   parallel: False
   # If seed is not set, then it will be random every time
-  seed: 1234
+  seed: 12345678
   # Defaults to run directory if not specified
   save_dir: 
   # continue from a previous job
@@ -55,7 +55,7 @@ model:
   gradient: False
 
 optim:
-  max_epochs: 200
+  max_epochs: 600
   max_checkpoint_epochs: 0
   lr: 0.001
   # Either custom or from torch.nn.functional library. If from torch, loss_type is TorchLossWrapper
@@ -70,18 +70,18 @@ optim:
     optimizer_args: {}
   scheduler:
     scheduler_type: ReduceLROnPlateau
-    scheduler_args: {mode: min, factor: 0.8, patience: 10, min_lr: 0.00001, threshold: 0.0002}
+    scheduler_args: {mode: min, factor: 0.85, patience: 15, min_lr: 0.00001, threshold: 0.0002}
   #Training print out frequency (print per n number of epochs)
   verbosity: 5
   # tdqm progress bar per batch in the epoch
   batch_tqdm: False
 
 dataset:
-  name: test_data
+  name: qm9
   # Whether the data has already been processed and a data.pt file is present from a previous run
   processed: False
   # Path to data files - this can either be in the form of a string denoting a single path or a dictionary of {train: train_path, val: val_path, test: test_path, predict: predict_path}
-  src: data/test_data/data_graph_scalar.json
+  src: data/qm9/QM9_5k.json
   #src: "/project/Rithwik/2D_data_npj/raw/"
   #src: "/project/Rithwik/QM9/data.json"
   # Path to target file within data_path
@@ -98,7 +98,7 @@ dataset:
         # index specifies the index of a target vector to predict, which is useful when there are multiple property labels for a single dataset
         # For example, an index: 0 (default) will use the first entry in the target vector 
         # if all values are to be predicted simultaneously, then specify index: -1
-        index: 0
+        index: 13
       otf_transform: True # Optional parameter, default is True
   # Format of data files (limit to those supported by ASE: https://wiki.fysik.dtu.dk/ase/ase/io/io.html)
   data_format: json 
@@ -136,6 +136,6 @@ dataset:
   # Where the dataset is loaded; either "cpu" or "cuda"
   dataset_device: cpu
   # Ratios for train/val/test split out of a total of less than 1 (0.8 corresponds to 80% of the data)
-  train_ratio: 0.8
-  val_ratio: 0.1
-  test_ratio: 0.1
+  train_ratio: 0.2
+  val_ratio: 0.0
+  test_ratio: 0.8
